@@ -62,8 +62,8 @@ export default class App extends Component {
   //SECTION APP
   render() {
     return (
-      <div className="App">
-        {this.state.columns.map((board, boardIndex) => (
+      <div className="App row">
+        {this.state.boards.map((board, boardIndex) => (
           <Board
             board={board}
             boardIndex={boardIndex}

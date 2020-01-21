@@ -19,7 +19,7 @@ export default function Board({ board, boardIndex, moveLeft, moveRight, addTask,
             removeTask={removeTask}
           />
         )}
-        <button onClick={addTask}>+</button>
+        <button onClick={addTask} className="btn btn-success mx-auto">+</button>
       </div>
     </div>
   )

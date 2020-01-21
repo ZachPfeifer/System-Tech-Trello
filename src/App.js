@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import Board from './components/Board'
 
+
+const LEFT = -1
+const RIGHT = 1
+
 export default class App extends Component {
   //SECTION STATE 
   constructor(props) {
@@ -49,14 +53,27 @@ export default class App extends Component {
   }
 
   //SECTION HANDLES
-  handleAdd() {
-
+  handleAdd = boardIndex => {
+    const name = window.prompt('name')
+    if (!name) { return }
+    debugger
+    const task = { name }
+    this.setState(prevState => {
+      const { boards } = this.state
+      boards[boardIndex].tasks.push(task)
+      return { boards }
+    })
   }
   handleDelete() {
 
   }
-  handleMove() {
-
+  handleMove = (boardIndex, taskIndex, direction) => {
+    this.setState(prevState => {
+      const { boards } = prevState
+      const [task] = boards[boardIndex].tasks.splice(taskIndex, 1)
+      boards[boardIndex + direction].tasks.push(task)
+      return { boards }
+    })
   }
 
   //SECTION APP
@@ -68,8 +85,9 @@ export default class App extends Component {
             board={board}
             boardIndex={boardIndex}
             key={boardIndex}
-          // movetask={}
-          // addTask={}
+            moveLeft={taskIndex => this.handleMove(boardIndex, taskIndex, LEFT)}
+            moveRight={taskIndex => this.handleMove(boardIndex, taskIndex, RIGHT)}
+            addTask={() => this.handleAdd(boardIndex)}
           // removeTask={}
           />
         )
